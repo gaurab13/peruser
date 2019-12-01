@@ -25,3 +25,4 @@ app.on('activate', () => {
     main.init();
   }
 });
+export default main;
