@@ -1,0 +1,100 @@
+.tab-container {
+  background: #f2f3f5;
+  border-bottom: 1px solid #dddddd;
+}
+
+.tab-item {
+  width: 240px;
+  height: 32px;
+  border-right: 1px solid #dbdce4;
+  padding: 8px 25px 8px 7px;
+  line-height: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  .tab-favicons {
+    margin: 5px;
+    img {
+      width: 16px;
+      top: -1px;
+    }
+    i {
+      width: 16px;
+      font-size: 16px;
+      top: 2px;
+    }
+  }
+
+  .tab-title {
+    height: 16px;
+    color: #272833;
+    font-size: 12px;
+  }
+
+  .close-tab {
+    position: absolute;
+    right: 0;
+    color: #212529;
+    cursor: pointer;
+    padding: 1px 4px 0 8px;
+    i {
+      font-size: 16px;
+      width: 20px;
+      height: 20px;
+      color: #9fa1b3;
+      &:hover {
+        color: #646575;
+      }
+    }
+  }
+}
+
+.tab-item.active {
+  background: #ffffff;
+  &:hover {
+    background: #f8f8fa;
+  }
+  .close-tab i {
+    &:hover {
+      color: #646575;
+    }
+  }
+}
+
+.add-tab {
+  cursor: pointer;
+  text-align: center;
+  line-height: 32px;
+  position: relative;
+  padding: 0 8px;
+  i {
+    font-size: 16px;
+    width: 24px;
+    height: 24px;
+    color: #646575;
+    &:hover {
+      color: #272833;
+    }
+  }
+}
+
+.omni-bar {
+  border-bottom: 1px solid #dddddd;
+  padding: 3px;
+  .form-control {
+    font-size: 14px;
+    border-radius: 2px;
+    height: 28px;
+    background: #f8f8fa;
+    &:focus {
+      border-color: #065da3;
+      box-shadow: none;
+    }
+  }
+}
+
+input:disabled {
+  cursor: not-allowed;
+}

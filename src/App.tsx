@@ -1,11 +1,10 @@
 import React from 'react';
-import './App.css';
+import TopBar from './components/TopBar';
+import 'bootstrap/scss/bootstrap.scss';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      React inside electron
-    </div>
+    <TopBar />
   );
 }
 
