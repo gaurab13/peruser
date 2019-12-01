@@ -1,17 +1,27 @@
-import { app, BrowserWindow } from 'electron';
- 
-function createWindow () {
-  // Create the browser window.
-  let win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
+import { app } from 'electron';
+import Main from './windows/main';
+
+const main = new Main();
+
+// Make the app a single instance app.
+// The main window will be restored and focused instead of a second window
+// opened when a person attempts to launch a second instance.
+if (!app.requestSingleInstanceLock()) {
+  app.quit();
+} else {
+  app.on('second-instance', () => {
+    if (main.window!) {
+      if (main.window!.isMinimized()) {
+        main.window!.restore();
+      }
+      main.window!.focus();
     }
   });
- 
-  // and load the index.html of the app.
-  win.loadURL('http://localhost:3000');
+  app.on('ready', main.init);
 }
- 
-app.on('ready', createWindow);
+
+app.on('activate', () => {
+  if (main.window === null) {
+    main.init();
+  }
+});
