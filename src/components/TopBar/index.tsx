@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './index.scss';
+import Navigator from '../Navigator';
 
 type ActionCreator = (...args: any[]) => void;
 
@@ -32,6 +33,11 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
   return (
     <div>
       <div className="d-flex flex-row tab-container">
+        <Navigator
+          canGoBack={true}
+          canGoForward={false}
+          isLoading={true}
+        />
         {urls.map((url, index) => {
           const activeClass = index === activeTabIndex ? 'active' : '';
           return (
@@ -49,7 +55,7 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
         <input
           type="text"
           className="form-control"
-          value={'url'}
+          value={urls[activeTabIndex]}
         />
       </div>
     </div>

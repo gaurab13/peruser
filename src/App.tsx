@@ -4,7 +4,9 @@ import 'bootstrap/scss/bootstrap.scss';
 
 const App: React.FC = () => {
   return (
-    <TopBar />
+    <div className="topbar" id="topbar">
+      <TopBar />
+    </div>
   );
 }
 
