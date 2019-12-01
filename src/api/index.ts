@@ -10,3 +10,8 @@ export const createBrowserView = (url: string) => {
 export const setActiveView = (index: number) => {
   ipcRenderer.send('set-active-view', index);
 }
+
+export const updateViewUrl = (url: string) => {
+  ipcRenderer.send('update-view-url', url);
+};
+

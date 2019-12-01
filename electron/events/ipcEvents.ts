@@ -9,6 +9,10 @@ const initIpcEventHandlers = () => {
   ipcMain.on('set-active-view', (event, arg) => {
     main.setActiveView(arg);
   });
+
+  ipcMain.on('update-view-url', (event, arg) => {
+    main.updateViewUrl(arg)
+  });
 };
 
 export default initIpcEventHandlers;

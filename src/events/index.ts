@@ -3,7 +3,6 @@ import store from '../store';
 import {
   updateNavigationState,
   updateTitle,
-  updateUrl,
   updateFavicon,
 } from '../action';
 
@@ -18,13 +17,13 @@ export const initiateRendererEvents = () => {
   });
 
   ipcRenderer.on('update-title', (event, arg) => {
-    const { viewId, title } = arg;
-    store.dispatch(updateTitle(viewId, title));
+    const { viewId, title, url } = arg;
+    store.dispatch(updateTitle(viewId, title, url));
   });
 
   ipcRenderer.on('update-navigation-state', (event, arg) => {
-    const { isLoading, canGoBack, canGoForward, viewId, url } = arg;
-    store.dispatch(updateNavigationState(isLoading, canGoBack, canGoForward, viewId, url));
+    const { isLoading, canGoBack, canGoForward, viewId } = arg;
+    store.dispatch(updateNavigationState(isLoading, canGoBack, canGoForward, viewId));
   });
 };
 

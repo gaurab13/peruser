@@ -1,0 +1,14 @@
+.omni-bar {
+  border-bottom: 1px solid #dddddd;
+  padding: 3px;
+  .form-control {
+    font-size: 14px;
+    border: none;
+    height: 28px;
+    background: #f8f8fa;
+    &:focus {
+      border-color: #065da3;
+      box-shadow: none;
+    }
+  }
+}

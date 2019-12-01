@@ -4,7 +4,7 @@ import './index.scss';
 import Navigator from '../Navigator';
 import { createBrowserView, setActiveView } from '../../api';
 import { initiateRendererEvents } from '../../events';
-type ActionCreator = (...args: any[]) => void;
+import OmniBar from '../OmniBar';
 
 interface IProps {
   urls: Array<string>;
@@ -40,7 +40,7 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
 
   useEffect(() => {
     initiateRendererEvents();
-    createDefaultTabs();
+    createDefaultTabs(); 
   }, []);
 
   return (
@@ -71,13 +71,7 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
           );
         })}
       </div>
-      <div className="omni-bar d-flex flex-row">
-        <input
-          type="text"
-          className="form-control"
-          value={urls[activeTabIndex]}
-        />
-      </div>
+      <OmniBar />
     </div>
   );
 };

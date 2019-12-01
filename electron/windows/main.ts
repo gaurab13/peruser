@@ -1,11 +1,12 @@
 import { BrowserWindow, BrowserView } from 'electron';
 import initIpcEventHandlers from '../events/ipcEvents';
 import initViewEventHandlers from '../events/viewEvents';
+import main from '../app';
 
 export default class Main {
   public window: BrowserWindow | null = null;
   public views: Array<BrowserView> = [];
-  protected activeView: BrowserView | null = null;
+  public activeView: BrowserView | null = null;
 
   public init = () => {
     this.window = new BrowserWindow({
@@ -34,7 +35,6 @@ export default class Main {
 
     view.webContents.loadURL(url);
     this.views.push(view);
-    this.window!.webContents.openDevTools();
     initViewEventHandlers(view);
   }
 
@@ -49,5 +49,9 @@ export default class Main {
       width: width,
       height: height - 68,
     });
+  }
+
+  public updateViewUrl(url: string) {
+    main.activeView!.webContents.loadURL(url);
   }
 }

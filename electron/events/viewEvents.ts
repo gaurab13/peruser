@@ -20,9 +20,12 @@ const initViewEventHandlers = (view: BrowserView) => {
 
   view.webContents.on('page-title-updated', (event: any, title: string) => {
     const viewId = main.views.indexOf(view);
+    const url = view.webContents.getURL();
+    console.log(url);
     main.window!.webContents.send('update-title', {
       viewId,
       title,
+      url,
     });
   });
 
@@ -37,12 +40,10 @@ const updateNavigationState = (isLoading: boolean, view: BrowserView) => {
   const viewId = main.views.indexOf(view);
   const canGoBack = view.webContents.canGoBack();
   const canGoForward = view.webContents.canGoForward();
-  const url = view.webContents.getURL();
   main.window!.webContents.send('update-navigation-state', {
     isLoading,
     canGoBack,
     canGoForward,
-    url,
     viewId,
   });
 }
