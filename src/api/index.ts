@@ -30,3 +30,7 @@ export const goBacktoPreviousPageView = () => {
 export const goForwardtoNextPageView = () => {
   ipcRenderer.send('go-forward-to-next-page-view');
 };
+
+export const removeBrowserView = (clickedIndex: number, newIndex: number) => {
+  ipcRenderer.send('remove-browser-view', {clickedIndex, newIndex});
+}

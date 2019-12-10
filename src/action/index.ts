@@ -32,3 +32,8 @@ export const setActiveTab = (tabIndex: number) => ({
   type: 'SET_ACTIVE_TAB',
   payload: tabIndex
 });
+
+export const removeTab = (clickedIndex: number, newIndex: number) => ({
+  type: 'REMOVE_TAB',
+  payload: {clickedIndex, newIndex}
+});

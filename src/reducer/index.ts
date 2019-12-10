@@ -47,6 +47,15 @@ const appReducer = (state = initialState, action: any) => {
       newState.activeTabIndex = payload;
       return newState;
     }
+    case 'REMOVE_TAB': {
+      const { newIndex, clickedIndex } = payload;
+      newState.urls.splice(clickedIndex, 1);
+      newState.titles.splice(clickedIndex, 1);
+      newState.favicons.splice(clickedIndex, 1);
+      newState.isLoading.splice(clickedIndex, 1);
+      newState.activeTabIndex = newIndex;
+      return newState;
+    }
     default:
       return state;
   }

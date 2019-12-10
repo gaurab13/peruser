@@ -1,9 +1,9 @@
 .browser-navigator {
   border-right: 1px solid #dbdce4;
   white-space: nowrap;
+  background-color: white;
   height: 32px;
   button {
-    background: #f2f3f5;
     cursor: pointer;
     border: 0;
     padding: 4px 4px 0 4px;
@@ -15,6 +15,7 @@
       width: 24px;
       height: 24px;
       font-size: 16px;
+      opacity: 1;
       color: #646575;
       &:hover {
         color: #272833;
@@ -24,6 +25,7 @@
   .disabled-btn {
     cursor: default;
     i {
+      opacity: 0.4;
       color: #9fa1b3;
       &:hover {
         color: #9fa1b3;

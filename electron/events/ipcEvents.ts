@@ -29,6 +29,11 @@ const initIpcEventHandlers = () => {
   ipcMain.on('go-forward-to-next-page-view', () => {
     main.goForwardtoNextPageView();
   });
+
+  ipcMain.on('remove-browser-view', (event, arg) => {
+    const {clickedIndex, newIndex} = arg;
+    main.removeBrowserView(clickedIndex, newIndex);
+  });
 };
 
 export default initIpcEventHandlers;

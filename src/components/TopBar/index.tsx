@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './index.scss';
 import Navigator from '../Navigator';
-import { updateUrls, setActiveTab } from '../../action';
-import { createBrowserView, setActiveView } from '../../api';
+import { updateUrls, setActiveTab, removeTab } from '../../action';
+import { createBrowserView, setActiveView, removeBrowserView } from '../../api';
 import { initiateRendererEvents } from '../../events';
 import OmniBar from '../OmniBar';
 
@@ -31,6 +31,7 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
     canGoForward,
     dispatch,
   } = props;
+
   const createDefaultTabs = () => {
     urls.map((url: string) => {
       createBrowserView(url);
@@ -38,8 +39,29 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
     });
   };
 
-  const handleTabClick = (tabIndex: number) => {
-    console.log(`Clicked tab ${tabIndex}`);
+  const handleTabClick = (clickedTabIndex: number) => {
+    if (clickedTabIndex !== activeTabIndex) {
+      props.dispatch(setActiveTab(clickedTabIndex));
+      setActiveView(clickedTabIndex);
+    }
+  };
+
+  const handleCloseTab = (evt: React.MouseEvent, clickedIndex: number) => {
+    evt.stopPropagation();
+    const totalTabs = urls.length;
+    let newActiveTab: number;
+    if (totalTabs === 1) {
+      return false;
+    }
+    if ( clickedIndex === activeTabIndex && clickedIndex === totalTabs - 1 ) {
+      newActiveTab = clickedIndex - 1;
+    } else if( clickedIndex < activeTabIndex ) {
+      newActiveTab = activeTabIndex - 1;
+    } else {
+      newActiveTab = activeTabIndex;
+    }
+    dispatch(removeTab(clickedIndex, newActiveTab));
+    removeBrowserView(clickedIndex, newActiveTab);
   }
 
   const handleAddTabClick = () => {
@@ -80,6 +102,9 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
                 )}
               </span>
               <span className="tab-title">{titles[index]}</span>
+              <span className="close-tab" onClick={evt => handleCloseTab(evt, index)}>
+                <i className="fa fa-times" />
+              </span>
             </div>
           );
         })}

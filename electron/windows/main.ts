@@ -19,6 +19,7 @@ export default class Main {
     this.window.loadURL('http://localhost:3000');
     this.window.on('closed', () => (this.window = null));
     initIpcEventHandlers();
+    this.window.webContents.openDevTools();
   }
 
   public createBrowserView(url: string) {
@@ -36,6 +37,16 @@ export default class Main {
     view.webContents.loadURL(url);
     this.views.push(view);
     initViewEventHandlers(view);
+  }
+
+  public removeBrowserView(clickedIndex:number, newIndex: number) {
+    console.log(clickedIndex, newIndex);
+    const mainWindow = this.window!;
+    const view = this.views[clickedIndex];
+    mainWindow.removeBrowserView(view);
+    view.destroy();
+    this.views.splice(clickedIndex, 1);
+    this.setActiveView(newIndex);
   }
 
   public setActiveView(activeIndex: number) {
