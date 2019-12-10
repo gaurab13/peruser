@@ -52,6 +52,25 @@ export default class Main {
   }
 
   public updateViewUrl(url: string) {
-    main.activeView!.webContents.loadURL(url);
+    this.activeView!.webContents.loadURL(url);
+  }
+
+  public reloadPageView() {
+    const url = this.activeView!.webContents.getURL();
+    const activeViewId = this.views.indexOf(this.activeView!);
+    this.window!.webContents.send('update-omnibar-url', { url, activeViewId });
+    this.activeView!.webContents.reload();
+  }
+
+  public stopPageViewReload() {
+    this.activeView!.webContents.stop();
+  }
+
+  public goBacktoPreviousPageView() {
+    this.activeView!.webContents.goBack();
+  }
+
+  public goForwardtoNextPageView() {
+    this.activeView!.webContents.goForward();
   }
 }

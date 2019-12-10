@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import {reloadPageView, stopPageViewReload, goBacktoPreviousPageView, goForwardtoNextPageView} from '../../api';
 import './index.scss';
 
 interface IProps {
@@ -8,28 +9,20 @@ interface IProps {
 }
 
 export const Navigator: React.FunctionComponent<IProps> = props => {
-  // useEffect(() => {
-  //   updateNavigationState();
-  // }, []);
-
   const handlePageviewReload = () => {
-    // reloadPageView();
-    console.log("yo")
+    reloadPageView();
   };
 
   const handleStopPageviewReload = () => {
-    // stopPageViewReload();
-    console.log("yo")
+    stopPageViewReload();
   };
 
   const handleOnBackClick = () => {
-    // goBacktoPreviousPageView();
-    console.log("yo")
+    goBacktoPreviousPageView();
   };
 
   const handleOnForwardClick = () => {
-    // goForwardtoNextPageView();
-    console.log("yo")
+    goForwardtoNextPageView();
   };
 
   return (

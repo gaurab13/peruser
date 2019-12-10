@@ -21,7 +21,6 @@ const initViewEventHandlers = (view: BrowserView) => {
   view.webContents.on('page-title-updated', (event: any, title: string) => {
     const viewId = main.views.indexOf(view);
     const url = view.webContents.getURL();
-    console.log(url);
     main.window!.webContents.send('update-title', {
       viewId,
       title,
