@@ -35,6 +35,18 @@ const appReducer = (state = initialState, action: any) => {
       newState.urls.splice(activeViewId, 1, value);
       return newState;
     }
+    case 'UPDATE_URLS': {
+      const { url } = payload;
+      newState.urls = [...newState.urls, url];
+      newState.titles = [...newState.titles, 'New Tab'];
+      newState.favicons = [...newState.favicons, ''];
+      newState.isLoading = [...newState.isLoading, true];
+      return newState;
+    }
+    case 'SET_ACTIVE_TAB': {
+      newState.activeTabIndex = payload;
+      return newState;
+    }
     default:
       return state;
   }

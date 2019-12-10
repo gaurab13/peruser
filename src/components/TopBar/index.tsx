@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './index.scss';
 import Navigator from '../Navigator';
+import { updateUrls, setActiveTab } from '../../action';
 import { createBrowserView, setActiveView } from '../../api';
 import { initiateRendererEvents } from '../../events';
 import OmniBar from '../OmniBar';
+
+type ActionCreator = (...args: any[]) => void;
 
 interface IProps {
   urls: Array<string>;
@@ -13,6 +16,7 @@ interface IProps {
   titles: Array<string>;
   favicons: Array<string>;
   canGoBack: boolean;
+  dispatch: ActionCreator;
   canGoForward: boolean;
 }
 
@@ -25,8 +29,8 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
     favicons,
     canGoBack,
     canGoForward,
+    dispatch,
   } = props;
-
   const createDefaultTabs = () => {
     urls.map((url: string) => {
       createBrowserView(url);
@@ -36,6 +40,15 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
 
   const handleTabClick = (tabIndex: number) => {
     console.log(`Clicked tab ${tabIndex}`);
+  }
+
+  const handleAddTabClick = () => {
+    const defaultUrl = 'https://www.google.com';
+    const newTabIndex = urls.length;
+    dispatch(updateUrls(defaultUrl));
+    dispatch(setActiveTab(newTabIndex));
+    createBrowserView(defaultUrl);
+    setActiveView(newTabIndex);
   }
 
   useEffect(() => {
@@ -70,6 +83,9 @@ export const TopBar: React.FunctionComponent<IProps> = props => {
             </div>
           );
         })}
+        <div className="add-tab" onClick={handleAddTabClick}>
+          <i className="fa fa-plus" />
+        </div>
       </div>
       <OmniBar />
     </div>

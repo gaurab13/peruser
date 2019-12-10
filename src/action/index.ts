@@ -22,3 +22,13 @@ export const updateOmniBarURL = (url: string, activeViewId: number) => ({
   type: 'UPDATE_OMNIBAR_URL',
   payload: { url, activeViewId },
 });
+
+export const updateUrls = (url: string) => ({
+  type: 'UPDATE_URLS',
+  payload: url
+});
+
+export const setActiveTab = (tabIndex: number) => ({
+  type: 'SET_ACTIVE_TAB',
+  payload: tabIndex
+});
