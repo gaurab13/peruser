@@ -4,7 +4,8 @@ import {
   updateNavigationState,
   updateTitle,
   updateFavicon,
-  updateOmniBarURL
+  updateOmniBarURL,
+  updateUrls
 } from '../action';
 
 const electron = window.require('electron');
@@ -30,6 +31,10 @@ export const initiateRendererEvents = () => {
   ipcRenderer.on('update-omnibar-url', (event, arg) => {
     const { url, activeViewId } = arg;
     store.dispatch(updateOmniBarURL(url, activeViewId));
+  });
+
+  ipcRenderer.on('update-urls', (event, arg) => {
+    store.dispatch(updateUrls(arg));
   });
 };
 

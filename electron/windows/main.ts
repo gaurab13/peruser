@@ -1,7 +1,7 @@
 import { BrowserWindow, BrowserView } from 'electron';
 import initIpcEventHandlers from '../events/ipcEvents';
 import initViewEventHandlers from '../events/viewEvents';
-import main from '../app';
+import { MainWindowContextMenu, RenderProcessContextMenu } from './contextMenu';
 
 export default class Main {
   public window: BrowserWindow | null = null;
@@ -18,8 +18,8 @@ export default class Main {
     this.window.maximize();
     this.window.loadURL('http://localhost:3000');
     this.window.on('closed', () => (this.window = null));
+    new MainWindowContextMenu(this.window);
     initIpcEventHandlers();
-    this.window.webContents.openDevTools();
   }
 
   public createBrowserView(url: string) {
@@ -37,10 +37,10 @@ export default class Main {
     view.webContents.loadURL(url);
     this.views.push(view);
     initViewEventHandlers(view);
+    new RenderProcessContextMenu(view);
   }
 
   public removeBrowserView(clickedIndex:number, newIndex: number) {
-    console.log(clickedIndex, newIndex);
     const mainWindow = this.window!;
     const view = this.views[clickedIndex];
     mainWindow.removeBrowserView(view);
