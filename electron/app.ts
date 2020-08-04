@@ -1,4 +1,4 @@
-import { app } from 'electron';
+import { app, session } from 'electron';
 import Main from './windows/main';
 
 const main = new Main();
@@ -17,7 +17,14 @@ if (!app.requestSingleInstanceLock()) {
       main.window!.focus();
     }
   });
-  app.on('ready', main.init);
+  // app.on('ready', main.init);
+  app.on('ready', () => {
+    session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
+        details.requestHeaders["User-Agent"] = "Chrome";
+        callback({ cancel: false, requestHeaders: details.requestHeaders });
+    });
+    main.init;
+  })
 }
 
 app.on('activate', () => {

@@ -92,7 +92,7 @@ export class RenderProcessContextMenu extends BaseContextMenu {
         id: this.backContextMenuIdLabel,
         label: this.backContextMenuIdLabel,
         enabled: false,
-        click: (menuItem: MenuItem, browserWindow: BrowserWindow, event: Event) => {
+        click: () => {
           browserView.webContents.goBack();
         },
       },
@@ -100,7 +100,7 @@ export class RenderProcessContextMenu extends BaseContextMenu {
         id: this.forwardContextMenuLabel,
         label: this.forwardContextMenuLabel,
         enabled: false,
-        click: (menuItem: MenuItem, browserWindow: BrowserWindow, event: Event) => {
+        click: () => {
           browserView.webContents.goForward();
         },
       },
@@ -108,7 +108,7 @@ export class RenderProcessContextMenu extends BaseContextMenu {
         id: '3',
         role: 'reload',
         accelerator: 'CmdOrCtrl+R',
-        click: (menuItem: MenuItem, browserWindow: BrowserWindow, event: Event) => {
+        click: () => {
           browserView.webContents.reload();
         },
       },
